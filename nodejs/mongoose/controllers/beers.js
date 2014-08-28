@@ -1,15 +1,10 @@
 var Model = require('./../models/beer');
 module.exports = {
 	create: function(req, res){
-		var dados = {
-				name: 'Heineken',
-				description: 'Até q eh boazinha',
-				alcohol: 5.5,
-				price: 3.5,
-				category: 'lager'
-			}
+		var dados = req.body
 
 		var model = new Model(dados);
+
 		model.save(function (err, data) {
 			if (err){
 				console.log('Erro: ', err);
@@ -17,9 +12,9 @@ module.exports = {
 			}
 			else{
 				console.log(data);
-				msg = JSON.stringify(data);
+				msg = data;
 			}
-			res.end(msg);
+			res.json(msg);
 		});
 	},
 	retrieve: function(req, res){
@@ -28,7 +23,7 @@ module.exports = {
 				console.log(err);
 			} else {
 				console.log(data);
-				res.end(JSON.stringify(data));
+				res.json(data);
 			}
 		});
 	},
