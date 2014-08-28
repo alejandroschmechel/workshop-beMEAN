@@ -1,0 +1,4 @@
+workshop-beMEAN
+===============
+
+BeMEAN Workshop
