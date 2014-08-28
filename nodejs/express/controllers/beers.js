@@ -3,9 +3,8 @@ module.exports = {
 	create: function(req, res, callback){
 		var dados = req.body
 		var model = new Model(dados);
-
 		model.save(function (err, data) {
-			callback(err,data);
+			callback(req, res, err,data);
 		});
 	},
 	retrieve: function(req, res, callback){
