@@ -1,0 +1,29 @@
+<!doctype html>
+<html ng-app="workshopBeMEAN">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ workshop }}</title>
+</head>
+<body>
+	<label for="name">Name:
+		<input type="text" data-ng-model='name'/>
+	</label>
+
+	Olá {{ name | reverseName | uppercase }}
+
+	</br>
+	<label for="workshop">Workshop: 
+		<input type="text" data-ng-model='workshop'/>
+	</label>
+	<script src="angular.min.js"></script>
+	<script>
+		angular.module('workshopBeMEAN', [])
+		.filter('reverseName', function () {
+			return function (text) {
+			if(text){
+				return text.split("").reverse().join("");
+			}};
+		});
+	</script>
+</body>
+</html>

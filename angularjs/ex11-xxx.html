@@ -1,0 +1,82 @@
+<!doctype html>
+<html data-ng-app="workshopBeMEAN">
+  <title>{{ workshop }}</title>
+  <body>
+
+    <div data-ng-controller='RedtubeController'>
+      <button data-ng-click='rodar()'>Mostrar</button>
+      <label for='search'>Search</label>
+      <input type='text' data-ng-model='search' id="search">
+      <label for='search_video'>Search Videos</label>
+      <input type='text' data-ng-model='searchVideo' id="search_video">
+      <!-- Colocar a listagem dos videos com suas thumbnails e link direto -->
+      <div data-ng-show='mostraListagem'>
+        <div style="border: 1px solid #000; margin-top: 3px;" data-ng-repeat="v in videos | filter:searchVideo">
+          <a href="{{ v.video.url }}" target="_blank"><h3>{{ v.video.title }}</h3></a>
+          <img data-ng-src="{{ v.video.default_thumb }}">
+          <ul data-ng-repeat="tag in v.video.tags">
+            <li> {{ tag.tag_name }} </span>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="angular.min.js"></script>
+    <script>
+      angular.module('workshopBeMEAN', ['workshopFilters', 'workshopControllers'])
+
+      angular.module('workshopControllers', [])
+      .controller('RedtubeController', ['$scope', '$http', 
+        function($scope, $http){
+
+          $scope.mostraListagem = false;
+          $scope.search = 'Stoya';
+
+          $scope.rodar = function(){
+            $scope.mostraListagem = !$scope.mostraListagem;
+          }
+
+          $scope.$watch('search', function(data) {
+            searchVideo(data);
+          });
+
+          // var url = 'http://cep.correiocontrol.com.br/02011200.json';
+          var searchVideo = function(query){
+            var url = 'http://cors-server.getup.io/url/api.redtube.com/?data=redtube.Videos.searchVideos&search='+query;
+            delete $http.defaults.headers.common['X-Requested-With'];
+            $http.get(url)
+            .success(function(data) { //função executada após o sucesso da requisição
+              console.log(data);
+              $scope.videos = data.videos;
+            })
+            .error(function(err){ //função executada após o erro da requisição
+              console.log('Error: ', err)
+            });
+          }
+        }])
+
+      angular.module('workshopFilters', [])
+        .filter('reverseName', function () {
+          return function (text) {
+            if(text)
+              return text.split("").reverse().join("");
+          };
+        })
+        .filter('truncate', function () {
+          return function (text, length, end) {
+            if (isNaN(length))
+                length = 10;
+            if (end === undefined)
+                end = "...";
+            if (text.length <= length || text.length - end.length <= length) {
+                return text;
+            }
+            else {
+                return String(text).substring(0, length-end.length) + end;
+            }
+          };
+      });
+    </script>
+  </body>
+</html>
+
