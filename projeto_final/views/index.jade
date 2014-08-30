@@ -1,0 +1,25 @@
+extends layout
+
+block body
+  div
+    h2 Workshop BeMEAN
+    ul.menu
+      li
+        a(href='beers') Listar Cervejas
+      li
+        a(href='beers/add') Cadastrar Cerveja
+      li
+        a(href='beers/total') Total de Cervejas
+
+    div(data-ng-view)
+
+    div
+      | Angular seed app: v
+      span(app-version)
+
+  script(src='js/lib/angular/angular.js')
+  script(src='js/app.js')
+  script(src='js/services.js')
+  script(src='js/controllers.js')
+  script(src='js/filters.js')
+  script(src='js/directives.js')

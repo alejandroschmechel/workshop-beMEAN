@@ -1,0 +1,20 @@
+{
+  "name": "projeto-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.0.2",
+    "errorhandler": "^1.1.1",
+    "express": "~4.1.1",
+    "jade": "~0.31.2",
+    "method-override": "^1.0.0",
+    "morgan": "^1.0.0",
+    "mongoose": "~3.8.15",
+    "promise": "~5.0.0",
+    "uglify-js": "~2.4.15",
+    "css": "~2.1.0"
+  }
+}

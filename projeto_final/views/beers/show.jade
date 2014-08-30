@@ -1,0 +1,16 @@
+p {{ msg }}
+
+p
+	span Name: {{beer.name}}
+p
+	span Description: {{beer.description}}
+p
+	span Alcohol: {{beer.alcohol}}
+p
+	span Category: {{beer.category}}
+p
+	span Price: {{beer.price}}
+p
+	a(href='/beers/{{beer._id}}/edit') Edit
+p
+	a(href='/beers/{{beer._id}}/remove') Remove

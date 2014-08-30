@@ -1,0 +1,19 @@
+h3 Listagem das Cervejas
+h4 {{ msg }}
+
+input(type='text', data-ng-model='searchList')
+br
+
+table
+	thead
+		tr
+			th(data-ng-click='ordenar("name")') Name
+			th(data-ng-click='ordenar("price")') Price
+	tbody
+		tr(data-ng-repeat='beer in beers | orderBy: predicate:reverse | filter:searchList')
+			td 
+				a(href='beers/{{ beer._id }}') 
+					{{ beer.name }}
+			td {{ beer.price }}
+			td
+				a(href='javascript:;', data-ng-click='remove(beer)') X

@@ -1,0 +1,8 @@
+h3 Listagem das Cervejas
+h4 {{ msg }}
+
+input(type='text', data-ng-model='searchList')
+
+ul
+	li(data-ng-repeat='beer in beers | filter:searchList')
+		| {{ beer.name }} - {{ beer-price }}
